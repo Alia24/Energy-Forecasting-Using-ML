@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 
 import { CSpinner, useColorModes } from '@coreui/react'
 import './scss/style.scss'
+import ForgotPassword from './views/pages/login/ForgotPassword'
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
@@ -44,6 +45,7 @@ const App = () => {
         <Routes>
           <Route exact path="/login" name="Login Page" element={<Login />} />
           <Route exact path="/register" name="Register Page" element={<Register />} />
+          <Route path="/forgot-password" name="Forgot Password Page" element={<ForgotPassword />} />
           <Route exact path="/404" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
           <Route path="*" name="Home" element={<DefaultLayout />} />

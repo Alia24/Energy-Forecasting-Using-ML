@@ -51,9 +51,11 @@ const Login = () => {
                         </CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
-                        <CButton color="link" className="px-0">
-                          Forgot password?
-                        </CButton>
+                        <Link to="/forgot-password">
+                          <CButton color="link" className="px-0">
+                            Forgot password?
+                          </CButton>  
+                        </Link>
                       </CCol>
                     </CRow>
                   </CForm>

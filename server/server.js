@@ -4,11 +4,15 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 
+const energyRoutes = require('./routes/energyRoutes');
+
 // load env variables
 dotenv.config();
 
 const app= express();
 const PORT = process.env.PORT;
+
+app.use(express.json());
 
 // app.use(cors()); //to allow cross-origin requests
 // app.use(bodyParser.json()); //parse application/json
@@ -22,6 +26,7 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.error("MongoDB connection error:", error));
 
+app.use('/api/energy', energyRoutes);
 
 app.listen(PORT, () => {
     console.log("Server is running...");

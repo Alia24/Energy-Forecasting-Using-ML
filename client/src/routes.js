@@ -52,6 +52,9 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 import DataInputPage from './views/pages/DataInputPage'
+import EquipmentNeedsCalculationPage from './views/pages/EquipmentNeedsCalculationPage'
+
+import { elements } from 'chart.js'
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -100,7 +103,7 @@ const routes = [
   { path: '/notifications/toasts', name: 'Toasts', element: Toasts },
   { path: '/widgets', name: 'Widgets', element: Widgets },
   { path: '/data-input', name: 'Data Input', element: DataInputPage },
-
+  { path: '/equipment-needs-calculation', name: 'Equipment Needs Calculation Page', element: EquipmentNeedsCalculationPage }
 ]
 
 export default routes

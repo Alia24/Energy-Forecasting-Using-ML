@@ -12,6 +12,7 @@ import {
   CButton,
   CAlert,
 } from '@coreui/react'
+import { Sun, MapPin, Battery, Droplet, Settings } from 'lucide-react' // Import Settings icon
 
 const DataInputPage = () => {
   const navigate = useNavigate()
@@ -49,21 +50,23 @@ const DataInputPage = () => {
   }
 
   const handleConfirm = () => {
-    // Here you would typically save the data to your state management solution or backend
-    // For now, we'll just navigate to the next page
     navigate('/equipment-needs-calculation')
   }
 
   return (
-    <CCard className="mb-4">
-      <CCardHeader>
-        <strong>Data Input</strong>
+    <CCard className="mb-4 border-0 shadow">
+      <CCardHeader className="bg-warning text-dark">
+        <Sun className="me-2" />
+        <strong>Solar Energy System Input</strong>
       </CCardHeader>
-      <CCardBody>
+      <CCardBody className="bg-light">
         <CForm onSubmit={handleSubmit}>
-          <CRow>
+          <CRow className="mb-4">
             <CCol md={6}>
-              <CFormLabel htmlFor="latitude">Latitude</CFormLabel>
+              <div className="d-flex align-items-center mb-2">
+                <MapPin className="me-2 text-primary" />
+                <CFormLabel htmlFor="latitude" className="mb-0">Latitude</CFormLabel>
+              </div>
               <CFormInput
                 type="number"
                 id="latitude"
@@ -71,11 +74,15 @@ const DataInputPage = () => {
                 value={formData.latitude}
                 onChange={handleInputChange}
                 invalid={!!errors.latitude}
+                placeholder="Enter latitude"
               />
               {errors.latitude && <div className="invalid-feedback">{errors.latitude}</div>}
             </CCol>
             <CCol md={6}>
-              <CFormLabel htmlFor="longitude">Longitude</CFormLabel>
+              <div className="d-flex align-items-center mb-2">
+                <MapPin className="me-2 text-primary" />
+                <CFormLabel htmlFor="longitude" className="mb-0">Longitude</CFormLabel>
+              </div>
               <CFormInput
                 type="number"
                 id="longitude"
@@ -83,13 +90,17 @@ const DataInputPage = () => {
                 value={formData.longitude}
                 onChange={handleInputChange}
                 invalid={!!errors.longitude}
+                placeholder="Enter longitude"
               />
               {errors.longitude && <div className="invalid-feedback">{errors.longitude}</div>}
             </CCol>
           </CRow>
-          <CRow className="mt-3">
+          <CRow className="mb-4">
             <CCol md={6}>
-              <CFormLabel htmlFor="energyConsumption">Energy Consumption (kWh)</CFormLabel>
+              <div className="d-flex align-items-center mb-2">
+                <Sun className="me-2 text-warning" />
+                <CFormLabel htmlFor="energyConsumption" className="mb-0">Energy Consumption (kWh)</CFormLabel>
+              </div>
               <CFormInput
                 type="number"
                 id="energyConsumption"
@@ -97,70 +108,88 @@ const DataInputPage = () => {
                 value={formData.energyConsumption}
                 onChange={handleInputChange}
                 invalid={!!errors.energyConsumption}
+                placeholder="Enter energy consumption"
               />
               {errors.energyConsumption && <div className="invalid-feedback">{errors.energyConsumption}</div>}
             </CCol>
-          </CRow>
-          <CRow className="mt-3">
             <CCol md={6}>
-              <CFormLabel htmlFor="generatorFuelConsumption">Generator Fuel Consumption Rate</CFormLabel>
+              <div className="d-flex align-items-center mb-2">
+                <Droplet className="me-2 text-info" />
+                <CFormLabel htmlFor="generatorFuelConsumption" className="mb-0">Generator Fuel Consumption Rate</CFormLabel>
+              </div>
               <CFormInput
                 type="number"
                 id="generatorFuelConsumption"
                 name="generatorFuelConsumption"
                 value={formData.generatorFuelConsumption}
                 onChange={handleInputChange}
+                placeholder="Enter fuel consumption rate"
               />
             </CCol>
+          </CRow>
+          <CRow className="mb-4">
             <CCol md={6}>
-              <CFormLabel htmlFor="generatorMaintenanceCost">Generator Maintenance Cost</CFormLabel>
+              <div className="d-flex align-items-center mb-2">
+                <Settings className="me-2 text-secondary" />
+                <CFormLabel htmlFor="generatorMaintenanceCost" className="mb-0">Generator Maintenance Cost</CFormLabel>
+              </div>
               <CFormInput
                 type="number"
                 id="generatorMaintenanceCost"
                 name="generatorMaintenanceCost"
                 value={formData.generatorMaintenanceCost}
                 onChange={handleInputChange}
+                placeholder="Enter maintenance cost"
               />
             </CCol>
-          </CRow>
-          <CRow className="mt-3">
             <CCol md={6}>
-              <CFormLabel htmlFor="batteryType">Current Battery Type</CFormLabel>
+              <div className="d-flex align-items-center mb-2">
+                <Battery className="me-2 text-success" />
+                <CFormLabel htmlFor="batteryType" className="mb-0">Current Battery Type</CFormLabel>
+              </div>
               <CFormInput
                 type="text"
                 id="batteryType"
                 name="batteryType"
                 value={formData.batteryType}
                 onChange={handleInputChange}
+                placeholder="Enter battery type"
               />
             </CCol>
+          </CRow>
+          <CRow className="mb-4">
             <CCol md={6}>
-              <CFormLabel htmlFor="batteryLifespan">Battery Lifespan (years)</CFormLabel>
+              <div className="d-flex align-items-center mb-2">
+                <Battery className="me-2 text-success" />
+                <CFormLabel htmlFor="batteryLifespan" className="mb-0">Battery Lifespan (years)</CFormLabel>
+              </div>
               <CFormInput
                 type="number"
                 id="batteryLifespan"
                 name="batteryLifespan"
                 value={formData.batteryLifespan}
                 onChange={handleInputChange}
+                placeholder="Enter battery lifespan"
               />
             </CCol>
           </CRow>
-          <CButton color="primary" type="submit" className="mt-3">
-            Submit
+          <CButton color="warning" type="submit" className="text-dark">
+            <Sun className="me-2" />
+            Calculate Solar Needs
           </CButton>
         </CForm>
 
         {showSummary && (
-          <CAlert color="info" className="mt-3">
-            <h4>Data Summary</h4>
-            <p>Location: {formData.latitude}, {formData.longitude}</p>
-            <p>Energy Consumption: {formData.energyConsumption} kWh</p>
-            <p>Generator Fuel Consumption: {formData.generatorFuelConsumption}</p>
-            <p>Generator Maintenance Cost: {formData.generatorMaintenanceCost}</p>
-            <p>Battery Type: {formData.batteryType}</p>
-            <p>Battery Lifespan: {formData.batteryLifespan} years</p>
+          <CAlert color="success" className="mt-4">
+            <h4 className="alert-heading">Solar System Summary</h4>
+            <p><strong>Location:</strong> {formData.latitude}, {formData.longitude}</p>
+            <p><strong>Energy Consumption:</strong> {formData.energyConsumption} kWh</p>
+            <p><strong>Generator Fuel Consumption:</strong> {formData.generatorFuelConsumption}</p>
+            <p><strong>Generator Maintenance Cost:</strong> {formData.generatorMaintenanceCost}</p>
+            <p><strong>Battery Type:</strong> {formData.batteryType}</p>
+            <p><strong>Battery Lifespan:</strong> {formData.batteryLifespan} years</p>
             <CButton color="success" onClick={handleConfirm}>
-              Confirm and Continue
+              Confirm and Design Solar System
             </CButton>
           </CAlert>
         )}

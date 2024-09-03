@@ -5,21 +5,28 @@
 const FuelPriceCalculator = require('./FuelPriceCalculator');
 
 class OldSystemCostCalculator {
-    constructor(acidBatteryCost, dieselGeneratorCost, fuelPriceCalculator) {
+    constructor(acidBatteryCost, dieselGeneratorCost, fuelPriceCalculator, numberOfAcidBatteries = 4, numberOfDieselGenerators = 1, numberOfBatteries = 2) {
         this.acidBatteryCost = acidBatteryCost;
         this.dieselGeneratorCost = dieselGeneratorCost;
         this.fuelPriceCalculator = fuelPriceCalculator;
+        this.numberOfAcidBatteries = numberOfAcidBatteries;
+        this.numberOfDieselGenerators = numberOfDieselGenerators;
+        this.numberOfBatteries = numberOfBatteries; // number of lithium batteries
     }
+
 
     calculateTotalCost(years, litre_consumption_avg_per_day, numberOfAcidBatteries) {
         //calculate the total cost of acid batteries
         const totalAcidBatteryCost = this.acidBatteryCost * numberOfAcidBatteries;
 
+        //calculate the cost of diesel generators
+        const totalDieselGeneratorCost = this.dieselGeneratorCost * this.numberOfDieselGenerators;
+
         //calculate the total cost of fuel using the fuel price calculator
         const totalFuelCost = this.fuelPriceCalculator.get_total_cost_of_fuel_over_x_years(years, litre_consumption_avg_per_day);
 
         // sum all costs
-        const totalCost = totalAcidBatteryCost + this.dieselGeneratorCost + totalFuelCost;
+        const totalCost = totalAcidBatteryCost + totalDieselGeneratorCost + totalFuelCost;
 
         return totalCost;
     }

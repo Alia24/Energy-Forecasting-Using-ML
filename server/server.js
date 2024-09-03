@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+// const cors = require('cors');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 
@@ -23,8 +23,8 @@ app.get('/', (req, res) => {
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((error) => console.error("MongoDB connection error:", error));
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((error) => console.error('Connection error', error));
 
 app.use('/api/energy', energyRoutes);
 

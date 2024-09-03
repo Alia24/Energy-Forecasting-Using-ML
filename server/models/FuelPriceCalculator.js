@@ -13,3 +13,5 @@ class FuelPriceCalculator{
 
 x = new FuelPriceCalculator(1)
 console.log(x.get_total_cost_of_fuel_over_x_years(25, 1))
+
+module.exports = FuelPriceCalculator;

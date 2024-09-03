@@ -1,8 +1,8 @@
 class FuelPriceCalculator{
-    constructor(price_last_12_month_avg_per_litre_dollar, years_of_consumption, litre_consumption_avg_per_day, avg_yearly_price_increase_percentage_adjusted_for_inflation) {
+    constructor(price_last_12_month_avg_per_litre_dollar, years_of_consumption, energy_consumption_avg_per_day_KWh, generator_liter_per_KWh, avg_yearly_price_increase_percentage_adjusted_for_inflation) {
         this._price_last_12_month_avg_per_litre_dollar = price_last_12_month_avg_per_litre_dollar;
         this._years_of_consumption = years_of_consumption;
-        this._litre_consumption_avg_per_day = litre_consumption_avg_per_day;
+        this._litre_consumption_avg_per_day = energy_consumption_avg_per_day_KWh * generator_liter_per_KWh;
         this._avg_yearly_price_increase_percentage_adjusted_for_inflation = avg_yearly_price_increase_percentage_adjusted_for_inflation;
         this._consumption_avg_per_year_litre = this._litre_consumption_avg_per_day * 365;
     }
@@ -32,5 +32,4 @@ class FuelPriceCalculator{
     }
 }
 
-// realistic values are 0.217, 25, 48, 0.07
 module.exports = FuelPriceCalculator;

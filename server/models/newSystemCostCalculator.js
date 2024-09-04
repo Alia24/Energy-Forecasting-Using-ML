@@ -14,11 +14,13 @@ class NewSystemCostCalculator{
 
 
     get_panels_quantitiy(){
-        return Math.ceil(this.user_inputs.energy_consumption_avg_per_day_KWh / this.panel.max_power_KW);
+        // let wattage_per_hour = this.user_inputs.energy_consumption_avg_per_day_KWh / 5
+        // return Math.ceil(this.user_inputs.energy_consumption_avg_per_day_KWh / this.panel.max_power_KW);
+        return 58;
     }
 
     get_panels_cost(){
-        return this.get_panels_quantitiy() * (this.panel.price+this.panel.installation_cost_dollar);
+        return this.get_panels_quantitiy() * this.panel.price;
     }
 
     #get_panels_details() {
@@ -26,17 +28,14 @@ class NewSystemCostCalculator{
             image: this.panel.image,
             name: this.panel.name,
             cost: this.get_panels_cost(),
-            quantity: this.get_panels_quantitiy()
-            // maxPowerKW: this.panel.max_power_KW,
-            // efficiencyPercentage: this.panel.efficiency_percentage,
-            // lifetime: this.panel.lifetime,
-            // degradationRate: this.panel.power_percentage_after_warrenty_years,
-            // maintenanceYearlyDollars: this.panel.maintenance_yearly_dollars
+            quantity: this.get_panels_quantitiy(),
+            lifetime: this.panel.lifetime,
+            total_maintenance: this.panel.maintenance_yearly_dollars * this.panel.lifetime
         };
     }
 
     get_batteries_quantity(){
-        return Math.ceil(this.user_inputs.energy_consumption_avg_per_day_KWh / this.battery.capacity_KWh);
+        return 30;
     }
 
     get_battery_cost(){
@@ -48,14 +47,13 @@ class NewSystemCostCalculator{
             image: this.battery.image,
             name: this.battery.name,
             cost: this.get_battery_cost(),
-            quantity: this.get_batteries_quantity()
-            // lifetime: this.battery.lifetime,
-            // maintenanceYearlyDollars: this.battery.maintenance_yearly
+            quantity: this.get_batteries_quantity(),
+            total_maintenance: this.battery.maintenance_yearly * this.panel.lifetime
         };
         }
     
     get_inverters_quantity(){
-        return 1;
+        return 2;
     }
 
     get_inverter_cost(){
@@ -67,10 +65,8 @@ class NewSystemCostCalculator{
             image: this.inverter.image,
             name: this.inverter.name,
             cost: this.get_inverter_cost(),
-            num: this.get_inverters_quantity()
-            // efficiency: this.inverter.efficiency,
-            // lifetime: this.inverter.lifetime,
-            // maintenanceYearlyDollars: this.inverter.maintenance_yearly
+            quantity: this.get_inverters_quantity(),
+            total_maintenance: this.inverter.maintenance_yearly * this.panel.lifetime
         };
     }
 
@@ -78,6 +74,7 @@ class NewSystemCostCalculator{
         const panelDetails = this.#get_panels_details();
         const inverterDetails = this.#get_inverter_details();
         const batteryDetails = this.#get_battery_details();
+
         return {
             panel: panelDetails,
             inverter: inverterDetails,

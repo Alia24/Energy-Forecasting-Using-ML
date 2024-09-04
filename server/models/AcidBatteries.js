@@ -5,6 +5,6 @@ const acidBatterySchema = new mongoose.Schema({
     price: Number,
 });
 
-const AcidBattery = mongoose.model('AcidBattery', acidBatterySchema);
+const AcidBatteries = mongoose.model('AcidBatteries', acidBatterySchema);
 
-module.exports = AcidBattery;
+module.exports = AcidBatteries;

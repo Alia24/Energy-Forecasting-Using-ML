@@ -11,6 +11,8 @@ import {
   Icon
 } from 'semantic-ui-react';
 
+import CostAnalysisPage from './CostAnalysisPage';
+
 const BASE_URL = "http://localhost:5000"
 
 const SolarDataInputPage = ({ onSubmit }) => {

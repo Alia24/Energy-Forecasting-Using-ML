@@ -12,8 +12,8 @@ const CostAnalysisPage = ({ data }) => {
         </Header>
         <Message>
           <Message.Header>Cost Analysis Summary</Message.Header>
-          <p><strong>Location:</strong> {data.latitude}, {data.longitude}</p>
-          <p><strong>Tower Energy Consumption Per Day:</strong> {data.energyConsumption} kWh</p>
+          <p><strong>Location:</strong> {1}, {1}</p>
+          <p><strong>Tower Energy Consumption Per Day:</strong> {1} kWh</p>
           {/* Add more details based on the analysis */}
         </Message>
       </Segment>

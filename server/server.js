@@ -27,7 +27,11 @@ const PORT = 5000;
 
 app.use(express.json());
 
-app.use(cors()); //to allow cross-origin requests
+//to allow cross-origin requests
+app.use(cors({
+    origin: "http://localhost:3000"
+}));
+
 // app.use(bodyParser.json()); //parse application/json
 
 app.get('/', (req, res) => {

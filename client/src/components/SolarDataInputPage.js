@@ -17,9 +17,9 @@ const BASE_URL = "http://localhost:5000"
 
 const SolarDataInputPage = () => {
   const [formData, setFormData] = useState({
-    latitude: '',
     longitude: '',
-    energyConsumption: ''
+    latitude: '',
+    energy_consumption_avg_per_day_KWh: ''
   });
   const [errors, setErrors] = useState({});
   const [showSummary, setShowSummary] = useState(false);
@@ -40,34 +40,33 @@ const SolarDataInputPage = () => {
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setPage("analysis");
-    // if (validateForm()) {
-    //   setPage('analysis');
-    // }
-    // if (validateForm()) {
-    //   try {
-    //     const response = await fetch(`${BASE_URL}/solar`, {
-    //       method: 'GET',
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: formData
-    //     });
-    //     if (!response.ok) {
-    //       throw new Error("Unexpected error when fetching old system vs new system analysis data.");
-    //     }
-
-    //     const data = await response.json();     // data yet to be sent back
-
-    //     setPage("analysis");
-    //   }
-    //   catch (error) {
-    //     // handling error
-    //   }
-    // }
+  
+    if (validateForm()) {
+      try {
+        const response = await fetch(`${BASE_URL}/api/energy/calculate`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+  
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Unexpected error when fetching data.');
+        }
+  
+        const data = await response.json();
+        console.log(data);
+        setPage("analysis");
+      } catch (error) {
+        // Display the error message to the user
+        alert(`Error: ${error.message}`);
+      }
+    }
   };
 
   if (page === "analysis") {
@@ -86,7 +85,7 @@ const SolarDataInputPage = () => {
             <label style={ {fontSize: "20px", marginBottom: "13px" } }><Icon name="sun" color="yellow" /> Latitude</label>
             <Input
               name="latitude"
-              value={formData.latitude}
+              defaultValue={formData.latitude}
               onChange={handleInputChange}
               placeholder="Enter latitude"
               type="number"
@@ -99,7 +98,7 @@ const SolarDataInputPage = () => {
             <label style={ {fontSize: "20px", marginBottom: "13px" } }><Icon name="sun" color="yellow" /> Longitude</label>
             <Input
               name="longitude"
-              value={formData.longitude}
+              defaultValue={formData.longitude}
               onChange={handleInputChange}
               placeholder="Enter longitude"
               type="number"
@@ -112,7 +111,7 @@ const SolarDataInputPage = () => {
             <label style={ {fontSize: "20px", marginBottom: "13px" } }><Icon name="bolt" color="yellow" /> Tower Energy Consumption Per Day (kWh)</label>
             <Input
               name="energyConsumption"
-              value={formData.energyConsumption}
+              defaultValue={formData.energyConsumption}
               onChange={handleInputChange}
               placeholder="Enter tower energy consumption per day"
               type="number"

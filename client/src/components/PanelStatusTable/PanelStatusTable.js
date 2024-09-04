@@ -41,9 +41,9 @@ class PanelStatusTable extends Component {
     return panels.map((panel) => panel.id);
   }
 
-  static forkOnGitHub() {
-    window.location.assign('https://github.com/gitname/solar-ui');
-  }
+  // static forkOnGitHub() {
+  //   window.location.assign('https://github.com/gitname/solar-ui');
+  // }
 
   render() {
     const rows = this.props.panels.map((panel) => {
@@ -84,11 +84,6 @@ class PanelStatusTable extends Component {
                   <Button basic color='green' disabled={this.allPanelsAreDisabled()} onClick={this.disableAllPanels.bind(this)}>Disable All</Button>
                   <Button color='green' disabled={this.allPanelsAreEnabled()} onClick={this.enableAllPanels.bind(this)}>Enable All</Button>
                 </Button.Group>
-
-                <Button size='small' color='green' icon labelPosition='left' floated='right'
-                        onClick={PanelStatusTable.forkOnGitHub}>
-                  <Icon name='fork'/> Fork on GitHub
-                </Button>
               </Table.HeaderCell>
             </Table.Row>
           </Table.Footer>

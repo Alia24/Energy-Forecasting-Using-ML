@@ -6,6 +6,11 @@ const dotenv = require('dotenv');
 const fs = require('fs');
 const path = require('path');
 
+const processDataRoutes = require('./routes/energyRoutes');
+
+// Use the new route
+app.use('/api/energy/calculate', processDataRoutes);
+
 // const OldSystemCostCalculator = require('./models/oldSystemCostCalculator');
 // const NewSystemCostCalculator = require('./models/newSystemCostCalculator');
 const energyRoutes = require('./routes/energyRoutes');

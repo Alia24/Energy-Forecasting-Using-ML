@@ -6,6 +6,8 @@ const dotenv = require('dotenv');
 const fs = require('fs');
 const path = require('path');
 
+const OldSystemCostCalculator = require('./models/oldSystemCostCalculator');
+const NewSystemCostCalculator = require('./models/newSystemCostCalculator');
 const energyRoutes = require('./routes/energyRoutes');
 
 // load env variables

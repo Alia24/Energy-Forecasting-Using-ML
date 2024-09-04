@@ -5,7 +5,6 @@ class AcidBattery {
         this.price = price;
         this.lifetime = lifetime;
         this.maintenance_yearly_dollar = maintenance_yearly_dollar;
-        this.installation_cost_dollar = installation_cost;
     }
 }
 

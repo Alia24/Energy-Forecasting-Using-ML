@@ -1,4 +1,4 @@
-export class Inverter{
+class Inverter{
     constructor(name, image, price, efficiency, lifetime, maintenance_yearly, installation_cost) {
         this.image = image;
         this.name = name;

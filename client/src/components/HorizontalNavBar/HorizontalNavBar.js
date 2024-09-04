@@ -48,7 +48,7 @@ class HorizontalNavBar extends Component {
                      className='hidden-on-small-monitor hidden-on-large-monitor'/>
 
           <Menu.Item as='a' header onClick={() => this.handleItemClick(null, { name: 'overview' })}>
-            <Icon name='sun' color='yellow'/> MySolarSystem
+            <img src={require('../../assets/SolarLink.png')} /> SolarLink
           </Menu.Item>
           <Menu.Item as='a' name='overview' active={activePage === 'overview'} onClick={this.handleItemClick}>
             Overview
@@ -56,7 +56,7 @@ class HorizontalNavBar extends Component {
           <Menu.Item as='a' name='solarInput' active={activePage === 'solarInput'} onClick={this.handleItemClick}>
             Solar Data Input
           </Menu.Item>
-          <Menu.Item as='a' name='solarPanels' active={activePage === 'solarPanels'} onClick={this.handleItemClick}>
+          {/* <Menu.Item as='a' name='solarPanels' active={activePage === 'solarPanels'} onClick={this.handleItemClick}>
             Solar Panels
           </Menu.Item>
           <Menu.Item as='a' name='inverters' active={activePage === 'inverters'} onClick={this.handleItemClick}>
@@ -64,9 +64,9 @@ class HorizontalNavBar extends Component {
           </Menu.Item>
           <Menu.Item as='a' name='batteries' active={activePage === 'batteries'} onClick={this.handleItemClick}>
             Batteries
-          </Menu.Item>
+          </Menu.Item> */}
 
-          <Menu.Menu position='right' className='hidden-on-tablet hidden-on-phone'>
+          {/* <Menu.Menu position='right' className='hidden-on-tablet hidden-on-phone'>
             <Dropdown item icon='dropdown' text={this.state.userName}>
               <Dropdown.Menu>
                 <Dropdown.Item onClick={() => this.handleItemClick(null, { name: 'profile' })} icon='user' text='Profile'/>
@@ -76,7 +76,7 @@ class HorizontalNavBar extends Component {
                 <Dropdown.Item onClick={() => this.handleItemClick(null, { name: 'signout' })} icon='log out' text='Sign out'/>
               </Dropdown.Menu>
             </Dropdown>
-          </Menu.Menu>
+          </Menu.Menu> */}
         </Container>
       </Menu>
     );

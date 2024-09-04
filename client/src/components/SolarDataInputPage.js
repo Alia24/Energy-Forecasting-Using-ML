@@ -11,11 +11,11 @@ import {
   Icon
 } from 'semantic-ui-react';
 
-import CostAnalysisPage from './CostAnalysisPage';
+import FinancialAnalysisPage from './FinancialAnalysisPage';
 
 const BASE_URL = "http://localhost:5000"
 
-const SolarDataInputPage = ({ onSubmit }) => {
+const SolarDataInputPage = () => {
   const [formData, setFormData] = useState({
     latitude: '',
     longitude: '',
@@ -43,43 +43,47 @@ const SolarDataInputPage = ({ onSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (validateForm()) {
-      try {
-        const response = await fetch(`${BASE_URL}/solar`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: formData
-        });
-        if (!response.ok) {
-          throw new Error("Unexpected error when fetching old system vs new system analysis data.");
-        }
-
-        const data = await response.json();     // data yet to be sent back
-
-        setPage("analysis");
-      }
-      catch (error) {
-        // handling error
-      }
+      setPage('analysis');
     }
+    // if (validateForm()) {
+    //   try {
+    //     const response = await fetch(`${BASE_URL}/solar`, {
+    //       method: 'GET',
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //       },
+    //       body: formData
+    //     });
+    //     if (!response.ok) {
+    //       throw new Error("Unexpected error when fetching old system vs new system analysis data.");
+    //     }
+
+    //     const data = await response.json();     // data yet to be sent back
+
+    //     setPage("analysis");
+    //   }
+    //   catch (error) {
+    //     // handling error
+    //   }
+    // }
   };
 
   if (page === "analysis") {
-    return <CostAnalysisPage formData={formData} />
+    return <FinancialAnalysisPage formData={formData} />
   }
 
   return (
-    <Container style={{ paddingTop: '10rem', height: "1500px" }}>
+    <Container style={{ paddingTop: '4rem', height: "800px" }}>
       <Segment color="yellow" padded="very" style={{ borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', width: '1000px' }}>
-        <Header as="h2" color="#f9bc16" textAlign="center">
-          <Icon name="sun" color="yellow" />
-          Solar Energy System Input
+        <Header as="h2" textAlign="center" style={{fontSize: "33px", marginLeft: "-70px"}}>
+          <img src={require('../assets/SolarLink.png')} style={ {width: "150px", height: "150px", marginBottom: "20px", marginRight: "0px"} }/>
+          <span style={ {'marginLeft': '-20px'} }>Solar Energy System Input</span>
         </Header>
         <Form onSubmit={handleSubmit}>
-          <Form.Field error={!!errors.latitude}>
-            <label><Icon name="sun" color="yellow" /> Latitude</label>
+          <Form.Field error={!!errors.latitude} >
+            <label style={ {fontSize: "20px", marginBottom: "13px" } }><Icon name="sun" color="yellow" /> Latitude</label>
             <Input
               name="latitude"
               value={formData.latitude}
@@ -87,11 +91,12 @@ const SolarDataInputPage = ({ onSubmit }) => {
               placeholder="Enter latitude"
               type="number"
               step="any"
+              style={ { marginBottom: "16px" } }
             />
             {errors.latitude && <span style={{ color: 'red' }}>{errors.latitude}</span>}
           </Form.Field>
           <Form.Field error={!!errors.longitude}>
-            <label><Icon name="sun" color="yellow" /> Longitude</label>
+            <label style={ {fontSize: "20px", marginBottom: "13px" } }><Icon name="sun" color="yellow" /> Longitude</label>
             <Input
               name="longitude"
               value={formData.longitude}
@@ -99,11 +104,12 @@ const SolarDataInputPage = ({ onSubmit }) => {
               placeholder="Enter longitude"
               type="number"
               step="any"
+              style={ { marginBottom: "16px" } }
             />
             {errors.longitude && <span style={{ color: 'red' }}>{errors.longitude}</span>}
           </Form.Field>
           <Form.Field error={!!errors.energyConsumption}>
-            <label><Icon name="bolt" color="yellow" /> Tower Energy Consumption Per Day (kWh)</label>
+            <label style={ {fontSize: "20px", marginBottom: "13px" } }><Icon name="bolt" color="yellow" /> Tower Energy Consumption Per Day (kWh)</label>
             <Input
               name="energyConsumption"
               value={formData.energyConsumption}
@@ -111,6 +117,7 @@ const SolarDataInputPage = ({ onSubmit }) => {
               placeholder="Enter tower energy consumption per day"
               type="number"
               step="any"
+              style={ { marginBottom: "16px" } }
             />
             {errors.energyConsumption && <span style={{ color: 'red' }}>{errors.energyConsumption}</span>}
           </Form.Field>
@@ -131,8 +138,8 @@ const SolarDataInputPage = ({ onSubmit }) => {
   );
 };
 
-SolarDataInputPage.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-};
+// SolarDataInputPage.propTypes = {
+//   onSubmit: PropTypes.func.isRequired
+// };
 
 export default SolarDataInputPage;

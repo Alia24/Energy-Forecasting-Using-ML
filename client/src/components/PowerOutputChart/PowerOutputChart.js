@@ -9,17 +9,12 @@ class PowerOutputChart extends Component {
     super(props);
 
     const xAxisLabel = 'Time';
-
     const yAxisLabel = 'kW';
 
     this.initialPointRadius = 2;
-
     this.powerLineLabel = 'Power Output';
-
     this.powerLineBackgroundColor = palette.lightGreen.setAlpha(0.1).toString();
-
     this.powerLineBorderColor = palette.lightGreen.toString();
-
     this.timeLabels = ['-5s', '', '', '', '', 'Now'];
 
     this.options = {
@@ -54,12 +49,10 @@ class PowerOutputChart extends Component {
       },
       tooltips: {
         callbacks: {
-          // Display the line label as the tooltip title.
           title: (tooltipItem, data) => {
             const datasetIndex = tooltipItem[0].datasetIndex;
             return data.datasets[datasetIndex].label;
           },
-          // Display a truncated version of the power value as the tooltip text.
           label: (tooltipItem, data) => {
             const powerValue = tooltipItem.yLabel;
             return powerValue.toFixed(2) + ' kW';
@@ -76,19 +69,20 @@ class PowerOutputChart extends Component {
       return PowerOutputChart.getTotalOutputPower(this.props.panels);
     });
 
-    // Store these values in the component state so React re-renders the component whenever these values change.
     this.state = {
       totalOutputPowerHistory: initialTotalOutputPowerHistory,
       pointRadius: this.initialPointRadius
     };
 
-    setInterval(this.updateTotalOutputPowerHistory.bind(this), 1000);
+    // Save the interval ID so it can be cleared later
+    this.intervalId = setInterval(this.updateTotalOutputPowerHistory.bind(this), 1000);
   }
 
-  /**
-   * Update the `totalOutputPowerHistory` property of the state, so it contains the newest output power value,
-   * and no longer contains the oldest output power value.
-   */
+  componentWillUnmount() {
+    // Clear the interval when the component unmounts
+    clearInterval(this.intervalId);
+  }
+
   updateTotalOutputPowerHistory() {
     this.setState((prevState, props) => {
       const totalOutputPowerHistory = prevState.totalOutputPowerHistory.concat();
@@ -101,12 +95,6 @@ class PowerOutputChart extends Component {
     });
   }
 
-  /**
-   * Returns the total output power [kW] of all panels, combined.
-   *
-   * @param panels - An array containing `panel` objects.
-   * @return {*} - A number representing the total output power.
-   */
   static getTotalOutputPower(panels) {
     return panels.reduce((accumulator, panel) => {
       const outputPowerW = panel.outputVoltageV * panel.outputCurrentA;
@@ -116,7 +104,6 @@ class PowerOutputChart extends Component {
   }
 
   render() {
-    // Construct the `data` object in the format the `Line` component expects.
     const data = {
       labels: this.timeLabels,
       datasets: [{

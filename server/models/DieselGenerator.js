@@ -1,5 +1,5 @@
 class DieselGenerator {
-    constructor(name, image, efficiency, emissions_per_year, backup_time, price, powerWatts, maintenanceYearly, lifetime) {
+    constructor(name, image, efficiency, emissions_per_year, backup_time, price, powerWatts, maintenanceYearly, lifetime, installation_cost) {
         this.image = image;
         this.name = name;
         this.efficiency = efficiency; // Efficiency of the generator (e.g., percentage)
@@ -9,6 +9,8 @@ class DieselGenerator {
         this.powerWatts = powerWatts; // Power output in watts
         this.maintenanceYearly = maintenanceYearly; // Yearly maintenance cost (e.g., in USD)
         this.lifetime = lifetime;
+        this.installation_cost_dollar = installation_cost;
+
     }
 }
 

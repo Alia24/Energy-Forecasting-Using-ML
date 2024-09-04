@@ -11,6 +11,8 @@ import {
   Icon
 } from 'semantic-ui-react';
 
+const BASE_URL = "http://localhost:5000"
+
 const SolarDataInputPage = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     latitude: '',
@@ -19,6 +21,7 @@ const SolarDataInputPage = ({ onSubmit }) => {
   });
   const [errors, setErrors] = useState({});
   const [showSummary, setShowSummary] = useState(false);
+  const [page, setPage] = useState("input");
 
   const handleInputChange = (e, { name, value }) => {
     setFormData(prevData => ({
@@ -36,18 +39,39 @@ const SolarDataInputPage = ({ onSubmit }) => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      setShowSummary(true);
-      onSubmit(formData);
+      try {
+        const response = await fetch(`${BASE_URL}/solar`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: formData
+        });
+        if (!response.ok) {
+          throw new Error("Unexpected error when fetching old system vs new system analysis data.");
+        }
+
+        const data = await response.json();     // data yet to be sent back
+
+        setPage("analysis");
+      }
+      catch (error) {
+        // handling error
+      }
     }
   };
 
+  if (page === "analysis") {
+    return <CostAnalysisPage formData={formData} />
+  }
+
   return (
-    <Container style={{ paddingTop: '2rem' }}>
-      <Segment color="yellow" padded="very" style={{ borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
-        <Header as="h2" color="#2594ae" textAlign="center">
+    <Container style={{ paddingTop: '10rem', height: "1500px" }}>
+      <Segment color="yellow" padded="very" style={{ borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', width: '1000px' }}>
+        <Header as="h2" color="#f9bc16" textAlign="center">
           <Icon name="sun" color="yellow" />
           Solar Energy System Input
         </Header>
@@ -88,7 +112,7 @@ const SolarDataInputPage = ({ onSubmit }) => {
             />
             {errors.energyConsumption && <span style={{ color: 'red' }}>{errors.energyConsumption}</span>}
           </Form.Field>
-          <Button type="submit" color="yellow" fluid>
+          <Button type="submit" color="yellow" fluid style={{marginTop: '30px'}}>
             <Icon name="calculator" /> Calculate Equipment Needs
           </Button>
         </Form>

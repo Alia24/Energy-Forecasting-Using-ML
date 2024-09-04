@@ -1,4 +1,4 @@
-export class Battery {
+class Battery {
     constructor(name, image, price, capacity, depth_of_discharge, maintenance_yearly, lifetime, installation_cost) {
         this.image = image;
         this.name = name;

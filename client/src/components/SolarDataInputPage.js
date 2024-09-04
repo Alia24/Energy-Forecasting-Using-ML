@@ -43,10 +43,10 @@ const SolarDataInputPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (validateForm()) {
-      setPage('analysis');
-    }
+    setPage("analysis");
+    // if (validateForm()) {
+    //   setPage('analysis');
+    // }
     // if (validateForm()) {
     //   try {
     //     const response = await fetch(`${BASE_URL}/solar`, {

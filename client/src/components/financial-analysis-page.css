@@ -1,0 +1,15 @@
+.custom-list {
+    padding-left: 0;
+  }
+  
+  .custom-list-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .custom-list-item .icon {
+    margin-right: 15px; /* Adjust spacing as needed */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+  }
+  

@@ -36,10 +36,6 @@ app.get('/api', (req, res) => {
     });
 });
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((error) => console.error('Connection error', error));
 
 app.use('/api/energy', energyRoutes);
 

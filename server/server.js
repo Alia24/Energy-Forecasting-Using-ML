@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const cors = require('cors');
+const cors = require('cors');
 const dotenv = require('dotenv');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
+const fs = require('fs');
+const path = require('path');
 
 const energyRoutes = require('./routes/energyRoutes');
 
@@ -14,11 +16,22 @@ const PORT = process.env.PORT;
 
 app.use(express.json());
 
-// app.use(cors()); //to allow cross-origin requests
+app.use(cors()); //to allow cross-origin requests
 // app.use(bodyParser.json()); //parse application/json
 
 app.get('/', (req, res) => {
     res.send('Backend is running');
+});
+
+app.get('/api', (req, res) => {
+    const filePath = path.join(__dirname, 'api.json');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            res.status(500).send('An error occurred while reading the file');
+            return;
+        }
+        res.json(JSON.parse(data));
+    });
 });
 
 // Connect to MongoDB

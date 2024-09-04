@@ -1,5 +1,7 @@
 class DieselGenerator {
-    constructor(efficiency, emissions_per_year, backup_time, price, powerWatts, maintenanceYearly, lifetime) {
+    constructor(name, image, efficiency, emissions_per_year, backup_time, price, powerWatts, maintenanceYearly, lifetime) {
+        this.image = image;
+        this.name = name;
         this.efficiency = efficiency; // Efficiency of the generator (e.g., percentage)
         this.emissions_per_year = emissions_per_year; // Emissions rate per year (e.g., in kg CO2/year)
         this.backup_time = backup_time; // Backup time the generator can provide (e.g., in hours)
@@ -9,3 +11,5 @@ class DieselGenerator {
         this.lifetime = lifetime;
     }
 }
+
+module.exports = { DieselGenerator };

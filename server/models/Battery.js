@@ -1,5 +1,7 @@
 export class Battery {
-    constructor(price, capacity, depth_of_discharge, maintenance_yearly, lifetime) {
+    constructor(name, image, price, capacity, depth_of_discharge, maintenance_yearly, lifetime) {
+        this.image = image;
+        this.name = name;
         this.price = price; // Price of the battery (e.g., in USD)
         this.capacity = capacity; // Capacity of the battery (e.g., in kWh)
         this.depth_of_discharge = depth_of_discharge; // Maximum depth of discharge (e.g., percentage)

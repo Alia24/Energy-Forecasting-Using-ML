@@ -17,7 +17,7 @@ class OldSystemCostCalculator {
     #get_generator_details() {
         let generator_details = {};
         generator_details["name"] = this._diesel_generator.name;
-        generator_details["image"] = this._diesel_generator.name;
+        generator_details["image"] = this._diesel_generator.image;
         generator_details["quantity"] = Math.ceil(this._lifetime_years / this._diesel_generator._lifetime_years);
         generator_details["price"] = generator_details["quantity"] * this._diesel_generator.price;
         return generator_details;
@@ -39,19 +39,20 @@ class OldSystemCostCalculator {
 
     #get_maintenance_cost() {
         let maintenance_cost = 0;
-        maintenance_cost += this._acid_battery.maintenance_yearly_dollar;
+        // maintenance_cost += this._acid_battery.maintenance_yearly_dollar;
         maintenance_cost += this._diesel_generator.maintenance_yearly_dollar;
 
         return maintenance_cost;
     }
 
-    get_details_of_new_system() {
+    get_details_of_old_system() {
         let details_of_old_system = {};
         details_of_old_system["generator"] = this.#get_generator_details();
-        details_of_old_system["acid_batteries"] = this.#get_acid_batteries_details();
+        // details_of_old_system["acid_batteries"] = this.#get_acid_batteries_details();
         details_of_old_system["fuel"] = this.#get_fuel_cost();
         details_of_old_system["maintenance_cost"] = this.#get_maintenance_cost();
         details_of_old_system["installation_cost"] = this._installation_cost;
+
         return details_of_old_system;
     }
 }

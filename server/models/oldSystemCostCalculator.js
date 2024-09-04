@@ -1,47 +1,33 @@
-// old system cost calculator model
-// This model calculates the total cost of the old system over a period of time
+const { AcidBatteries } = require('./AcidBattery');
+const { DieselGenerator } = require('./DieselGenerator');
+const { FuelPriceCalculator } = require('./FuelPriceCalculator');
+const { UserInputs } = require('./UserInputs');
 
-// const mongoose = require('mongoose');
-const FuelPriceCalculator = require('./FuelPriceCalculator');
 
 class OldSystemCostCalculator {
-    constructor(acidBatteryCost, dieselGeneratorCost, fuelPriceCalculator, numberOfAcidBatteries = 4, numberOfDieselGenerators = 1, numberOfBatteries = 2) {
-        this.acidBatteryCost = acidBatteryCost;
-        this.dieselGeneratorCost = dieselGeneratorCost;
-        this.fuelPriceCalculator = fuelPriceCalculator;
-        this.numberOfAcidBatteries = numberOfAcidBatteries;
-        this.numberOfDieselGenerators = numberOfDieselGenerators;
-        this.numberOfBatteries = numberOfBatteries; // number of lithium batteries
+    constructor(acid_battery, user_input, fuel_price_calculator, diesel_generator, lifetime_years) {
+        this.acid_battery = acid_battery;
+        this.user_input = user_input;
+        this.diesel_generator = diesel_generator;
+        this.fuel_price_calculatorf = fuel_price_calculator;
+        this.lifetime_years = lifetime_years;
+    }
+
+    #get_generator_details() {
+        let generator_details = {};
+        generator_details{}
+    }
+
+    get_details_of_new_system() {
+        let details_of_old_system = {};
+
+        let generator_details = this.#get_generator_details();
+
+        details_of_old_system["generator"] = generator_details;
+
     }
 
 
-    calculateTotalCost(years, litre_consumption_avg_per_day, numberOfAcidBatteries) {
-        //calculate the total cost of acid batteries
-        const totalAcidBatteryCost = this.acidBatteryCost * numberOfAcidBatteries;
-
-        //calculate the cost of diesel generators
-        const totalDieselGeneratorCost = this.dieselGeneratorCost * this.numberOfDieselGenerators;
-
-        //calculate the total cost of fuel using the fuel price calculator
-        const totalFuelCost = this.fuelPriceCalculator.get_total_cost_of_fuel_over_x_years(years, litre_consumption_avg_per_day);
-
-        // sum all costs
-        const totalCost = totalAcidBatteryCost + totalDieselGeneratorCost + totalFuelCost;
-
-        return totalCost;
-    }
 }
 
-// Example usage:
-// const fuelPriceCalculator = new FuelPriceCalculator(1);
-// const oldSystemCostCalculator = new OldSystemCostCalculator(100, 500, fuelPriceCalculator);
-// console.log(oldSystemCostCalculator.calculateTotalCost(25, 1, 10));
-
-
-// const oldSystemCost = new mongoose.Schema({
-//     totalCost: Number,
-// });
-
-// const OldSystem = mongoose.model('OldSystem', oldSystemCost);
-
-// module.exports = OldSystem;
+module.exports = { FuelPriceCalculator };

@@ -17,8 +17,7 @@ class NewSystemCostCalculator{
     }
 
     get_details_of_new_system(){
-        let price = 0;
-        price += this.#get_panels_details()
+
     }
 
 

@@ -1,0 +1,47 @@
+.latest-events-feed--event-content {
+    margin-top: 0.25em !important;
+}
+
+.latest-events-feed--event-summary {
+    font-weight: 400 !important;
+}
+
+.latest-events-feed--event-date {
+    font-size: .85714286em !important;
+}
+
+.latest-events-feed--event-date:hover {
+    cursor: default;
+}
+
+/* Animate the entrance of the New Event. */
+.latest-events-feed--event--enter {
+    opacity: 0;
+}
+
+.latest-events-feed--event--enter.latest-events-feed--event--enter-active {
+    /* Fade in. */
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+/* Describe and animate the New Event indicator pseudo-element. */
+.latest-events-feed--event-date::after {
+    content: '';
+    display: inline-block;
+    margin-left: .5em;
+    height: .5em;
+    width: .5em;
+    border-radius: .5em;
+    background-color: rgba(33, 186, 67, 1);
+
+    /* Fade out. */
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.latest-events-feed--event--enter.latest-events-feed--event--enter-active .latest-events-feed--event-date::after {
+    /* Fade in. */
+    opacity: 1;
+    transition: opacity 1s ease;
+}

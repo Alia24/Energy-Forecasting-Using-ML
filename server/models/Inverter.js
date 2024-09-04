@@ -1,8 +1,10 @@
-class Inverter{
-    constructor(price, efficiency, warranty, maintenance_yearly) {
+export class Inverter{
+    constructor(price, efficiency, lifetime, maintenance_yearly) {
         this.price = price
         this.efficiency = efficiency
-        this.warranty = warranty
+        this.lifetime = lifetime
         this.maintenance_yearly = maintenance_yearly
     }
 }
+
+module.exports = { Inverter };

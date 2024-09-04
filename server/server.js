@@ -76,10 +76,10 @@ app.post('/api/energy/calculate', (req, res) => {
     }
 
     let user_input = new UserInputs(longitude, latitude, energy_consumption_avg_per_day_KWh);
-    let panel = read("C:\\Users\\Khaled Al-Shaer\\PycharmProjects\\Energy-Forecasting-Using-ML\\server\\Products\\Panel.json");
-    let inverter = read("C:\\Users\\Khaled Al-Shaer\\PycharmProjects\\Energy-Forecasting-Using-ML\\server\\Products\\Inverter.json");
-    let battery = read("C:\\Users\\Khaled Al-Shaer\\PycharmProjects\\Energy-Forecasting-Using-ML\\server\\Products\\Battery.json");
-    let generator = read("C:\\Users\\Khaled Al-Shaer\\PycharmProjects\\Energy-Forecasting-Using-ML\\server\\Products\\Generator.json");
+    let panel = read("./Products/Panel.json");
+    let inverter = read("./Products/Inverter.json");
+    let battery = read("./Products/Battery.json");
+    let generator = read("./Products/Generator.json");
     let fuel_calculator = new FuelPriceCalculator(0.2323, panel.lifetime, 0.07, generator.litres_per_day, 0.1, 0.015);
 
     let old = new OldSystemCostCalculator(undefined, user_input, fuel_calculator, generator, panel.lifetime, 6000)

@@ -1,4 +1,4 @@
-class Batteries {
+class Battery {
     constructor(price, capacity, depth_of_discharge, maintenance_yearly, warranty) {
         this.price = price; // Price of the battery (e.g., in USD)
         this.capacity = capacity; // Capacity of the battery (e.g., in kWh)

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { 
   Container, 
@@ -24,6 +24,7 @@ const SolarDataInputPage = () => {
   const [errors, setErrors] = useState({});
   const [showSummary, setShowSummary] = useState(false);
   const [page, setPage] = useState("input");
+  const [analysisData, setAnalysisData] = useState({});
 
   const handleInputChange = (e, { name, value }) => {
     setFormData(prevData => ({
@@ -40,7 +41,7 @@ const SolarDataInputPage = () => {
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -60,17 +61,18 @@ const SolarDataInputPage = () => {
         }
   
         const data = await response.json();
-        console.log(data);
+        console.log(data.old_system)
+        delete data.old_system.generator.image;
+        setAnalysisData(data);
         setPage("analysis");
       } catch (error) {
-        // Display the error message to the user
         alert(`Error: ${error.message}`);
       }
     }
   };
 
   if (page === "analysis") {
-    return <FinancialAnalysisPage formData={formData} />
+    return <FinancialAnalysisPage analysisData={analysisData} />
   }
 
   return (

@@ -33,18 +33,18 @@ const FinancialAnalysisPage = ({ analysisData }) => {
                 <List.Content style={{ flex: 1 }}>
                   <List.Header>Generator Cost</List.Header>
                 </List.Content>
-                <List.Content style={{ marginRight: '15px' }}>
+                <List.Content style={{ marginRight: '45px' }}>
                   <List.Description>${old_system.generator.price || 'N/A'}</List.Description>
                 </List.Content>
                 <img src={require('../assets/generator.webp')} alt={old_system.generator.name} style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
               </List.Item>
               <List.Item style={{ marginBottom: "40px", display: 'flex', alignItems: 'center' }}>
                 <Icon name="chart line" style={{ marginRight: '15px' }} />
-                <List.Content style={{ flex: 1 }}>
+                <List.Content style={{ flex: 1, marginRight: "32px"} }>
                   <List.Header>Fuel Cost (Annual)</List.Header>
                 </List.Content>
                 <List.Content style={{ marginRight: '15px' }}>
-                  <List.Description>${Math.round(old_system.fuel.total_cost)}</List.Description>
+                  <List.Description style={{marginRight: "58px"}}>${Math.round(old_system.fuel.total_cost)}</List.Description>
                 </List.Content>
               </List.Item>
               <List.Item style={{ marginBottom: "40px", display: 'flex', alignItems: 'center' }}>
@@ -53,7 +53,7 @@ const FinancialAnalysisPage = ({ analysisData }) => {
                   <List.Header>Maintenance Cost (Annual)</List.Header>
                 </List.Content>
                 <List.Content style={{ marginRight: '15px' }}>
-                  <List.Description>${Math.round(old_system.maintenance_cost)}</List.Description>
+                  <List.Description style={{marginRight: "80px"}}>${Math.round(old_system.maintenance_cost)}</List.Description>
                 </List.Content>
               </List.Item>
               <List.Item style={{ marginBottom: "20px", display: 'flex', alignItems: 'center' }}>
@@ -62,16 +62,16 @@ const FinancialAnalysisPage = ({ analysisData }) => {
                   <List.Header>Installation Cost</List.Header>
                 </List.Content>
                 <List.Content style={{ marginRight: '15px' }}>
-                  <List.Description>${Math.round(old_system.installation_cost)}</List.Description>
+                  <List.Description style={{marginRight: "73px"}}>${Math.round(old_system.installation_cost)}</List.Description>
                 </List.Content>
               </List.Item>
               <List.Item style={{ marginTop: "40px", display: 'flex', alignItems: 'center', borderTop: '2px solid #f2711c', paddingTop: '20px' }}>
                 <Icon name="dollar" style={{ marginRight: '15px' }} color="green" size="large" />
                 <List.Content style={{ flex: 1 }}>
-                  <List.Header as="h4" style={{ color: '#21ba45' }}>Total Cost</List.Header>
+                  <List.Header as="h4" style={{ color: '#21ba45', marginLeft: "-7px" }}>Total Cost</List.Header>
                 </List.Content>
                 <List.Content style={{ marginRight: '15px' }}>
-                  <List.Description as="h4" style={{ color: '#21ba45' }}>${Math.round(oldSystemTotalCost)}</List.Description>
+                  <List.Description as="h4" style={{ color: '#21ba45', marginRight: "55px" }}>${Math.round(oldSystemTotalCost)}</List.Description>
                 </List.Content>
               </List.Item>
             </List>
@@ -122,13 +122,13 @@ const FinancialAnalysisPage = ({ analysisData }) => {
                   <List.Description style={{ marginRight: '123px' }} >${Math.round(new_system.battery.total_maintenance + new_system.inverter.total_maintenance)}</List.Description>
                 </List.Content>
               </List.Item>
-              <List.Item style={{ marginTop: "40px", display: 'flex', alignItems: 'center', borderTop: '2px solid #f2711c', paddingTop: '20px' }}>
+              <List.Item style={{ marginRight: "30px", marginTop: "40px", display: 'flex', alignItems: 'center', borderTop: '2px solid #f2711c', paddingTop: '20px' }}>
                 <Icon name="dollar" style={{ marginRight: '15px' }} color="green" size="large" />
                 <List.Content style={{ flex: 1 }}>
-                  <List.Header as="h4" style={{ color: '#21ba45' }}>Total Cost</List.Header>
+                  <List.Header as="h4" style={{ color: '#21ba45', marginLeft: "-5px" }}>Total Cost</List.Header>
                 </List.Content>
-                <List.Content style={{ marginRight: '15px' }}>
-                  <List.Description as="h4" style={{ color: '#21ba45' }}>${Math.round(newSystemTotalCost)}</List.Description>
+                <List.Content style={{ marginRight: '20px' }}>
+                  <List.Description as="h4" style={{ color: '#21ba45', marginRight: "51px" }}>${Math.round(newSystemTotalCost)}</List.Description>
                 </List.Content>
               </List.Item>
             </List>

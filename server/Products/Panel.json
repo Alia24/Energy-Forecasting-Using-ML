@@ -5,6 +5,6 @@
   "price": 600,
   "lifetime": 30,
   "power_percentage_after_warrenty_years": 1,
-  "maintenance_yearly_dollars": 100,
+  "maintenance_yearly_dollars": 0,
   "installation_cost_dollar": 6000
 }

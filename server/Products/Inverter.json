@@ -4,6 +4,6 @@
   "price": 2600,
   "efficiency": 0.99,
   "lifetime": 13,
-  "maintenance_yearly": 100,
+  "maintenance_yearly": 0,
   "installation_cost_dollar": 2000
 }

@@ -20,7 +20,7 @@ class NewSystemCostCalculator{
     }
 
     get_panels_cost(){
-        return this.get_panels_quantitiy() * this.panel.price;
+        return this.panel.price;
     }
 
     #get_panels_details() {
@@ -39,7 +39,7 @@ class NewSystemCostCalculator{
     }
 
     get_battery_cost(){
-        return this.get_batteries_quantity() * (this.battery.price);
+        return this.battery.price;
     }
 
     #get_battery_details(){
@@ -57,7 +57,7 @@ class NewSystemCostCalculator{
     }
 
     get_inverter_cost(){
-        return this.inverter.price*this.get_inverters_quantity();
+        return this.inverter.price;
     }
 
     #get_inverter_details(){

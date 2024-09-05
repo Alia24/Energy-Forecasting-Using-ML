@@ -4,7 +4,7 @@
   "price": 10000,
   "capacity": 13.5,
   "depth_of_discharge": 1,
-  "maintenance_yearly": 200,
+  "maintenance_yearly": 0,
   "lifetime": 13,
   "installation_cost_dollar": 7000
 }

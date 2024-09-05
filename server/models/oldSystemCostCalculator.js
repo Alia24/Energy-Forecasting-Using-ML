@@ -18,7 +18,7 @@ class OldSystemCostCalculator {
         let generator_details = {};
         generator_details["name"] = this._diesel_generator.name;
         generator_details["image"] = this._diesel_generator.image;
-        generator_details["quantity"] = Number(Math.ceil(this._lifetime_years / this._diesel_generator._lifetime_years));
+        generator_details["quantity"] = Number(Math.ceil(this._lifetime_years / this._diesel_generator.lifetime));
         generator_details["price"] = generator_details["quantity"] * this._diesel_generator.price;
         return generator_details;
     }

@@ -14,8 +14,11 @@ class NewSystemCostCalculator{
 
 
     get_panels_quantitiy(){
-        let power_kwh = this.user_inputs.energy_consumption_avg_per_day_KWh / 5;
-        return Math.ceil(power_kwh / (this.panel.max_power_KW * 0.9));
+        let power_kwh = this.user_inputs.energy_consumption_avg_per_day_KWh * 1000 / 5;
+        // console.log(power_kwh)
+        let final = Math.ceil(power_kwh / (this.panel.max_power_KW * 0.9))
+        // console.log(final);
+        return final;
     }
 
     get_panels_cost(){
@@ -34,7 +37,10 @@ class NewSystemCostCalculator{
     }
 
     get_batteries_quantity(){
-        return Math.ceil((this.user_inputs.energy_consumption_avg_per_day_KWh * 2 ) / this.battery.capacity) * (Math.ceil(this.panel.lifetime / this.battery.lifetime));
+        let final = Math.ceil(((this.user_inputs.energy_consumption_avg_per_day_KWh * 2 ) / this.battery.capacity) * (this.panel.lifetime / this.battery.lifetime))
+        // console.log(final);
+        console.log(this.user_inputs)
+        return final;
     }
 
     get_battery_cost(){

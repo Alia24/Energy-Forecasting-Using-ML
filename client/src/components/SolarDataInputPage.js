@@ -1,12 +1,11 @@
-import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { 
-  Container, 
-  Form, 
-  Input, 
-  Button, 
-  Header, 
-  Segment, 
+import React, { useState } from 'react';
+import {
+  Container,
+  Form,
+  Input,
+  Button,
+  Header,
+  Segment,
   Message,
   Icon
 } from 'semantic-ui-react';
@@ -19,7 +18,7 @@ const SolarDataInputPage = () => {
   const [formData, setFormData] = useState({
     longitude: '',
     latitude: '',
-    energy_consumption_avg_per_day_KWh: ''
+    energy_consumption_avg_per_day_KWh: '' // Corrected key
   });
   const [errors, setErrors] = useState({});
   const [showSummary, setShowSummary] = useState(false);
@@ -37,14 +36,14 @@ const SolarDataInputPage = () => {
     let tempErrors = {};
     if (!formData.latitude) tempErrors.latitude = 'Latitude is required';
     if (!formData.longitude) tempErrors.longitude = 'Longitude is required';
-    if (!formData.energyConsumption) tempErrors.energyConsumption = 'Energy consumption is required';
+    if (!formData.energy_consumption_avg_per_day_KWh) tempErrors.energy_consumption_avg_per_day_KWh = 'Energy consumption is required'; // Updated validation
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (validateForm()) {
       try {
         const response = await fetch(`${BASE_URL}/api/energy/calculate`, {
@@ -54,15 +53,14 @@ const SolarDataInputPage = () => {
           },
           body: JSON.stringify(formData)
         });
-  
+
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || 'Unexpected error when fetching data.');
         }
-  
+
         const data = await response.json();
-        console.log(data.old_system)
-        delete data.old_system.generator.image;
+        delete data.old_system.generator.image; // Handle analysis data
         setAnalysisData(data);
         setPage("analysis");
       } catch (error) {
@@ -109,18 +107,18 @@ const SolarDataInputPage = () => {
             />
             {errors.longitude && <span style={{ color: 'red' }}>{errors.longitude}</span>}
           </Form.Field>
-          <Form.Field error={!!errors.energyConsumption}>
+          <Form.Field error={!!errors.energy_consumption_avg_per_day_KWh}>
             <label style={ {fontSize: "20px", marginBottom: "13px" } }><Icon name="bolt" color="yellow" /> Tower Energy Consumption Per Day (kWh)</label>
             <Input
-              name="energyConsumption"
-              defaultValue={formData.energyConsumption}
+              name="energy_consumption_avg_per_day_KWh" // Updated input name
+              defaultValue={formData.energy_consumption_avg_per_day_KWh}
               onChange={handleInputChange}
               placeholder="Enter tower energy consumption per day"
               type="number"
               step="any"
               style={ { marginBottom: "16px" } }
             />
-            {errors.energyConsumption && <span style={{ color: 'red' }}>{errors.energyConsumption}</span>}
+            {errors.energy_consumption_avg_per_day_KWh && <span style={{ color: 'red' }}>{errors.energy_consumption_avg_per_day_KWh}</span>}
           </Form.Field>
           <Button type="submit" color="yellow" fluid style={{marginTop: '30px'}}>
             <Icon name="calculator" /> Calculate Equipment Needs
@@ -131,16 +129,12 @@ const SolarDataInputPage = () => {
           <Message positive>
             <Message.Header>Solar System Summary</Message.Header>
             <p><strong>Location:</strong> {formData.latitude}, {formData.longitude}</p>
-            <p><strong>Tower Energy Consumption Per Day:</strong> {formData.energyConsumption} kWh</p>
+            <p><strong>Tower Energy Consumption Per Day:</strong> {formData.energy_consumption_avg_per_day_KWh} kWh</p>
           </Message>
         )}
       </Segment>
     </Container>
   );
 };
-
-// SolarDataInputPage.propTypes = {
-//   onSubmit: PropTypes.func.isRequired
-// };
 
 export default SolarDataInputPage;

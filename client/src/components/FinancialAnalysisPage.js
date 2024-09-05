@@ -18,7 +18,7 @@ const FinancialAnalysisPage = ({ analysisData }) => {
       <Segment color="yellow" padded="very" style={{ borderRadius: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
         <Header as="h2" textAlign="center" style={{ marginBottom: "40px", marginLeft: "-20px" }}>
           <Icon name="calculator" color="yellow" />
-          Cost Analysis
+          Cost Analysis (Over 30 Years)
         </Header>
         
         <Grid columns={2} divided>
@@ -99,7 +99,7 @@ const FinancialAnalysisPage = ({ analysisData }) => {
                   <List.Header>Inverter Cost</List.Header>
                 </List.Content>
                 <List.Content style={{ marginRight: '15px' }}>
-                  <List.Description style={{ marginRight: '45px' }}>${Math.round(new_system.inverter.cost)} (x{new_system.inverter.quantity})</List.Description>
+                  <List.Description style={{ marginRight: '30px' }}>${Math.round(new_system.inverter.cost)} (x{new_system.inverter.quantity})</List.Description>
                 </List.Content>
                 <img src={`data:image/jpeg;base64,${new_system.inverter.image}`} alt={new_system.inverter.name} style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
               </List.Item>

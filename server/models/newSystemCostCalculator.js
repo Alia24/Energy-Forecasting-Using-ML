@@ -14,9 +14,8 @@ class NewSystemCostCalculator{
 
 
     get_panels_quantitiy(){
-        // let wattage_per_hour = this.user_inputs.energy_consumption_avg_per_day_KWh / 5
-        // return Math.ceil(this.user_inputs.energy_consumption_avg_per_day_KWh / this.panel.max_power_KW);
-        return 58;
+        let power_kwh = this.user_inputs.energy_consumption_avg_per_day_KWh / 5;
+        return Math.ceil(power_kwh / (this.panel.max_power_KW * 0.9));
     }
 
     get_panels_cost(){
@@ -35,7 +34,7 @@ class NewSystemCostCalculator{
     }
 
     get_batteries_quantity(){
-        return 30;
+        return Math.ceil((this.user_inputs.energy_consumption_avg_per_day_KWh * 2 ) / this.battery.capacity) * (Math.ceil(this.panel.lifetime / this.battery.lifetime));
     }
 
     get_battery_cost(){
@@ -50,10 +49,10 @@ class NewSystemCostCalculator{
             quantity: this.get_batteries_quantity(),
             total_maintenance: this.battery.maintenance_yearly * this.panel.lifetime
         };
-        }
+    }
     
     get_inverters_quantity(){
-        return 2;
+        return Math.ceil(this.panel.lifetime / this.inverter.lifetime);
     }
 
     get_inverter_cost(){

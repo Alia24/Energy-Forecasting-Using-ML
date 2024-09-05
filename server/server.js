@@ -89,6 +89,8 @@ app.post('/api/energy/calculate', (req, res) => {
     let old = new OldSystemCostCalculator(undefined, user_input, fuel_calculator, generator, panel.lifetime, 6000)
     let New = new NewSystemCostCalculator(panel, inverter, battery, user_input)
 
+    console.log(New.get_details_of_new_system());
+
     res.json({
         "old_system" : old.get_details_of_old_system(),
         'new_system' : New.get_details_of_new_system()
